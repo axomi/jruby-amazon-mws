@@ -9,5 +9,6 @@ group :development do
   gem "bundler"
   gem "jeweler"
   gem "simplecov"
-  gem "rdoc"
+  gem "rdoc" 
+  gem "rspec"
 end

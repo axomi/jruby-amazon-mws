@@ -24,14 +24,6 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
  
-class String
-  def underscore
-    self.gsub(/::/, '/').
-    gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
-    gsub(/([a-z\d])([A-Z])/,'\1_\2').
-    tr("-", "_").
-    downcase
-  end
-end
-
+require 'jruby-amazon-mws/try'
+require 'jruby-amazon-mws/string' 
 require 'jruby-amazon-mws/jruby_amazon_mws'

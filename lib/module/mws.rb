@@ -37,7 +37,8 @@ require 'java/log4j-1.2.14.jar'
                              
 module MWS
   include_package 'com.amazonservices.mws.products'
-  include_package 'com.amazonservices.mws.products.model'
+  include_package 'com.amazonservices.mws.products.model' 
+  include_package 'com.amazonservices.mws.products.mock'
 end      
 
  

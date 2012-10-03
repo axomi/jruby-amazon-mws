@@ -41,17 +41,22 @@ module AmazonMWS
       @marketplace = options[:marketplace]
       @seller = options[:seller]
       @application_name = options[:application_name] 
-      @application_version = options[:application_version] 
+      @application_version = options[:application_version]
+      mock_service = options[:mock_service] || false 
       # configure the underlying Java service  
       config = MWS::MarketplaceWebServiceProductsConfig.new 
-      config.service_url = service_url_for_locale(self.locale)
-      @service = MWS::MarketplaceWebServiceProductsClient.new(
-				self.key, 
-				self.secret, 
-				self.application_name, 
-				self.application_version, 
-				config
-			)
+      config.service_url = service_url_for_locale(self.locale)  
+      unless mock_service
+        @service = MWS::MarketplaceWebServiceProductsClient.new(
+  				self.key, 
+  				self.secret, 
+  				self.application_name, 
+  				self.application_version, 
+  				config
+  			) 
+  		else 
+  		  @service = MWS::MarketplaceWebServiceProductsMock.new
+		  end
     end
     
     # TODO: need to add try() to check for nils
@@ -62,7 +67,7 @@ module AmazonMWS
       result = response.get_lowest_offer_listings_for_asin_result.first
       lowest_offer_listings = result.product.lowest_offer_listings.lowest_offer_listing
       lowest_offer = lowest_offer_listings.map { |item| BigDecimal(item.price.listing_price.amount.to_s) }.min
-      lowest_offer.nil? ? nil : lowest_offer.to_s(' F') 
+      lowest_offer.nil? ? nil : lowest_offer.to_s(' F').strip 
     end  
     
     def list_matching_products(query, category = :all)
@@ -91,7 +96,8 @@ module AmazonMWS
                 end
                   
                 if identifiers.isSetSKUIdentifier  
-                  sku_identifier = identifiers.SKU_Identifier 
+                  sku_identifier = identifiers.getSKUIdentifier 
+                  matching_product.sku_identifier = OpenStruct.new
                   matching_product.sku_identifier.marketplace_id = sku_identifier.marketplace_id
                   #puts "sku_identifier.marketplace_id ==> #{sku_identifier.marketplace_id}" if sku_identifier.set_marketplace_id?
                   #puts "sku_identifier.seller_id ==> #{sku_identifier.seller_id}" if sku_identifier.set_seller_id?
@@ -104,15 +110,17 @@ module AmazonMWS
                 matching_product.attributes = []
                 attribute_set_list.any.each do |attribute_set|
                   attributes_set_parsed = Crack::XML.parse(MWS::ProductsUtil.format_xml(attribute_set))
-                  #puts "attributes_set_parsed ==> #{attributes_set_parsed}"  
-                  attributes = OpenStruct.new  
-                  attributes_set_parsed["ns2:ItemAttributes"].delete "xmlns:ns2" 
-                  attributes_set_parsed["ns2:ItemAttributes"].delete "xmlns"
-                  attributes_set_parsed["ns2:ItemAttributes"].each_pair do |key,value|
-                    # remove the ns2: from key, underscore and add to the attributes struct 
-                    # TODO (need to do this recursively)
-                    attributes.send(%[#{key.gsub("ns2:", "").underscore}=], value)
-                  end 
+                  item_attributes = attributes_set_parsed["ns2:ItemAttributes"] 
+                  attributes = OpenStruct.new   
+                  if item_attributes
+                    item_attributes.delete "xmlns:ns2" 
+                    item_attributes.delete "xmlns"
+                    item_attributes.each_pair do |key,value|
+                      # remove the ns2: from key, underscore and add to the attributes struct 
+                      # TODO (need to do this recursively)
+                      attributes.send(%[#{key.gsub("ns2:", "").underscore}=], value)
+                    end 
+                  end
                   matching_product.attributes << attributes
                 end
               end  
@@ -129,7 +137,7 @@ module AmazonMWS
                 competitive_pricing = product.competitive_pricing
                 if competitive_pricing.set_competitive_prices?
                   competitive_prices = competitive_pricing.competitive_prices
-                  competitive_price_list = competitivePrices.competitive_price 
+                  competitive_price_list = competitive_prices.competitive_price 
                   matching_product.competitive_pricing_list = []
                   competitive_price_list.each do |competitive_price| 
                     matching_product_competitive_price = OpenStruct.new
