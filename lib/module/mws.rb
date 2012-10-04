@@ -24,16 +24,16 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
     
-require 'java/MaWSProductsJavaClientLibrary-1.0.jar'
-require 'java/jsr173_1.0_api.jar'
-require 'java/activation.jar'                          
-require 'java/jaxb-api.jar'                                             
-require 'java/jaxb-impl.jar'
-require 'java/jaxb-xjc.jar'
-require 'java/commons-logging-1.1.jar'                 
-require 'java/commons-codec-1.3.jar'                   
-require 'java/commons-httpclient-3.0.1.jar'  
-require 'java/log4j-1.2.14.jar'
+require_relative '../java/MaWSProductsJavaClientLibrary-1.0.jar'
+require_relative '../java/jsr173_1.0_api.jar'
+require_relative '../java/activation.jar'                          
+require_relative '../java/jaxb-api.jar'                                             
+require_relative '../java/jaxb-impl.jar'
+require_relative '../java/jaxb-xjc.jar'
+require_relative '../java/commons-logging-1.1.jar'                 
+require_relative '../java/commons-codec-1.3.jar'                   
+require_relative '../java/commons-httpclient-3.0.1.jar'  
+require_relative '../java/log4j-1.2.14.jar'
                              
 module MWS
   include_package 'com.amazonservices.mws.products'

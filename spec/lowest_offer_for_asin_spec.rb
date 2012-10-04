@@ -1,9 +1,11 @@
 require_relative '../lib/jruby_amazon_mws' 
+require_relative './support/mock_service'  
 
 module AmazonMWS
   describe Client, "#lowest_offer_for_asin" do
-     before do
-       @client = AmazonMWS::Client.new(:mock_service => true)
+     before do 
+       service = AmazonMWS::MockService.new(:lowest_offer_for_asin_response => "#{File.dirname(__FILE__)}/sample_responses/GetLowestOfferListingsForASINResponse.xml") 
+       @client = AmazonMWS::Client.new(:service => service)
      end 
      
      it 'returns lowest price given an ASIN' do   
@@ -11,5 +13,7 @@ module AmazonMWS
        lowest.should eq('1000.0') 
      end
   end
-end
+end  
+
+
 

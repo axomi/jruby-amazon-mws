@@ -41,22 +41,22 @@ module AmazonMWS
       @marketplace = options[:marketplace]
       @seller = options[:seller]
       @application_name = options[:application_name] 
-      @application_version = options[:application_version]
-      mock_service = options[:mock_service] || false 
-      # configure the underlying Java service  
-      config = MWS::MarketplaceWebServiceProductsConfig.new 
-      config.service_url = service_url_for_locale(self.locale)  
-      unless mock_service
+      @application_version = options[:application_version] 
+      @service = options[:service]   
+      
+      unless @service
+        # configure the underlying Java service  
+        config = MWS::MarketplaceWebServiceProductsConfig.new 
+        config.service_url = service_url_for_locale(self.locale)  
+      
         @service = MWS::MarketplaceWebServiceProductsClient.new(
-  				self.key, 
-  				self.secret, 
-  				self.application_name, 
-  				self.application_version, 
-  				config
-  			) 
-  		else 
-  		  @service = MWS::MarketplaceWebServiceProductsMock.new
-		  end
+    			self.key, 
+    			self.secret, 
+    			self.application_name, 
+    			self.application_version, 
+    			config
+    		) 
+  		end 
     end
     
     # TODO: need to add try() to check for nils

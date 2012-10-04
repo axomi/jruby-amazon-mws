@@ -1,9 +1,11 @@
 require_relative '../lib/jruby_amazon_mws' 
+require_relative './support/mock_service'
 
 module AmazonMWS
   describe Client, "#list_matching_products" do
-     before do
-       @client = AmazonMWS::Client.new(:mock_service => true)
+     before do     
+       service = AmazonMWS::MockService.new(:list_matching_products_response => "#{File.dirname(__FILE__)}/sample_responses/ListMatchingProductsResponse.xml") 
+       @client = AmazonMWS::Client.new(:service => service)
      end 
      
      it 'returns the list of matching products given a string query' do 
