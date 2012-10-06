@@ -91,7 +91,7 @@ See usage examples under /examples directory of this distribution
 Contact
 -------
 
-Authors:: Brian Sam-Bodden, Danny Whalen
-Email:: bsbodden@integrallis.com, dwhalen@integrallis.com
-Home Page:: http://integrallis.com
-License:: MIT Licence (http://www.opensource.org/licenses/mit-license.html)
+* Authors:: Brian Sam-Bodden, Danny Whalen
+* Email:: bsbodden@integrallis.com, dwhalen@integrallis.com
+* Home Page:: http://integrallis.com
+* License:: MIT Licence (http://www.opensource.org/licenses/mit-license.html)
