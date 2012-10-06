@@ -60,7 +60,7 @@ end
 Writing Tests
 ------------- 
 
-To simplify the writing of test a mock service implementation is provided that can be passed to a Client instance. The mock service can be configure to respond with a canned XML response as follows:
+To simplify writing tests a mock service implementation is provided that can be passed to a Client instance. The mock service can be configure to respond with a canned XML response for a given API call as follows:
 
 ```ruby
 require 'jruby_amazon_mws'  
