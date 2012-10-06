@@ -5,7 +5,7 @@ A JRuby Library to acess the Amazon Marketplace Web Service (Amazon MWS) API ver
 
 https://images-na.ssl-images-amazon.com/images/G/01/mwsportal/clientlib/products/amazon-mws-v20111001-java-2012-07-01._V388353362_.zip 
 
-For more information on the backing library see See https://developer.amazonservices.com/doc/products/products/v20111001/java.html
+For more information on the backing library see https://developer.amazonservices.com/doc/products/products/v20111001/java.html
 
 Prerequisites
 -------------
@@ -14,7 +14,7 @@ An Amazon Pro Merchant seller account or another Amazon account that makes you e
     
 Registering for Amazon MWS. For more information see the Amazon MWS FAQ.
     
-This GEM targets the JRuby (1.6.x - 1.7.x) distributions. 
+This Gem targets the JRuby (1.6.x - 1.7.x) distributions. 
 
 Usage
 ----- 
@@ -36,11 +36,10 @@ client = AmazonMWS::Client.new(
 
 matching_products = client.list_matching_products('Harry Potter')       
 matching_products.each do |product|
-  puts "==================================="
+
   puts "Found product with ASIN: #{product.asin}"
   puts "marketplace_id: #{product.marketplace_id}" 
-  
-  puts "attributes:"  
+   
   product.attributes.each do |attribute|
     puts "  title: #{attribute.title}" 
     puts "  publisher: #{attribute.publisher}"  
@@ -48,13 +47,13 @@ matching_products.each do |product|
     puts "  format: #{attribute.binding}"
   end   
   
-  lowest = client.lowest_offer_for_asin(product.asin) 
-  puts "lowest price: #{lowest}"
-  
   puts "sales rank:" unless product.sales_rank_list.empty? 
   product.sales_rank_list.each do |sr|
     puts "  rank: #{sr.rank}, category: #{sr.category}"
   end
+
+  lowest = client.lowest_offer_for_asin(product.asin)
+  puts "lowest price: #{lowest}"
 end
 ``` 
 
