@@ -21,7 +21,7 @@ Usage
 
 All API access is through the class AmazonMWS::Client
 
-```
+```ruby
 require 'jruby_amazon_mws'
 
 client = AmazonMWS::Client.new(
