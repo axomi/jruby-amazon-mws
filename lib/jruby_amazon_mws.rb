@@ -27,3 +27,4 @@
 require 'jruby-amazon-mws/try'
 require 'jruby-amazon-mws/string' 
 require 'jruby-amazon-mws/jruby_amazon_mws'
+require 'jruby-amazon-mws/mock_service'

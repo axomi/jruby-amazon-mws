@@ -1,5 +1,4 @@
-require_relative '../lib/jruby_amazon_mws' 
-require_relative './support/mock_service'  
+require_relative '../lib/jruby_amazon_mws'   
 
 module AmazonMWS
   describe Client, "#lowest_offer_for_asin" do
