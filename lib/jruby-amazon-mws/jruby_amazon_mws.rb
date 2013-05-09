@@ -303,33 +303,13 @@ module AmazonMWS
     
     def _configure_product_lowest_offer(product, matching_product)         
       if product.set_lowest_offer_listings?
-        lowest_offer_listings = product.lowest_offer_listings
-        lowest_offer_listing_list = lowest_offer_listings.lowest_offer_listing
-        lowest_offer_listing_list.each do |lowest_offer_listing|
-          if lowest_offer_listing.set_qualifiers?
-            qualifiers = lowest_offer_listing.qualifiers
-          
-            if qualifiers.set_shipping_time?
-              shipping_time = qualifiers.shipping_time
-            end 
-          
-          end
-                          
-          if lowest_offer_listing.set_price?
-            price1 = lowest_offer_listing.price
-            if price1.set_landed_price?
-              landed_price1 = price1.landed_price
-            end
-          
-            if price1.set_listing_price?
-              listing_price1 = price1.listing_price
-            end
-           
-            if price1.set_shipping?
-              shipping1 = price1.shipping
-            end 
-          end 
-     
+        product.lowest_offer_listings.lowest_offer_listing.each do |lowest_offer_listing|
+          qualifiers = lowest_offer_listing.qualifiers if lowest_offer_listing.set_qualifiers?
+          shipping_time = qualifiers.shipping_time if qualifiers && qualifiers.set_shipping_time?
+          price1 = lowest_offer_listing.price if lowest_offer_listing.set_price?
+          landed_price1 = price1.landed_price if price1 && price1.set_landed_price?
+          listing_price1 = price1.listing_price if price1 && price1.set_listing_price?
+          shipping1 = price1.shipping if price1 && price1.set_shipping?
         end 
       end
     end
