@@ -335,16 +335,13 @@ module AmazonMWS
     end
     
     def _configure_product_offers(product, matching_product)     
-      offer_list = product.set_offers? ? product.offers.offers.offer : []
+      offer_list = product.set_offers? ? product.offers.offer : []
     
-      offer_list.each do |offer|
-        if offer.set_buying_price?
-          buying_price = offer.buying_price
-          landed_price2 = buying_price.landed_price if buying_price.set_landed_price?
-          listing_price2 = buying_price.listing_price if buying_price.set_listing_price?
-          shipping2 = buying_price.shipping if buying_price.set_shipping?
-        end 
-
+      offer_list.to_a.keep_if {|offer| offer.set_buying_price? }.each do |offer|
+        buying_price = offer.buying_price
+        landed_price2 = buying_price.landed_price if buying_price.set_landed_price?
+        listing_price2 = buying_price.listing_price if buying_price.set_listing_price?
+        shipping2 = buying_price.shipping if buying_price.set_shipping?
         regular_price = offer.regular_price if offer.set_regular_price?               
       end
     end
