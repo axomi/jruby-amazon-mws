@@ -1,1 +1,1 @@
-rvm use jruby-1.7.0.RC1@jruby-amazon-mws --create
+rvm use jruby@jruby-amazon-mws --create

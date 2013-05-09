@@ -26,22 +26,6 @@ require 'rake'
 
 # --------------------------------------------------------------------
 
-require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  gem.name = "jruby-amazon-mws"
-  gem.homepage = "http://github.com/integrallis/jruby-amazon-mws"
-  gem.license = "MIT"
-  gem.summary = "JRuby client for Amazon MWS"
-  gem.description = "JRuby client for Amazon Marketplace Web Service (Amazon MWS)"
-  gem.email = "bsbodden@integrallis.com"
-  gem.authors = ["Brian Sam-Bodden"]
-  gem.platform = "java"
-  gem.files = FileList["VERSION", "History.txt", "Manifest.txt", "README.md", "Gemfile", "Gemfile.lock", "Rakefile", "LICENSE", "lib/**/*.rb", "lib/java/*.jar"]
-end
-Jeweler::RubygemsDotOrgTasks.new
-
-# --------------------------------------------------------------------
-
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
   test.libs << 'lib' << 'test'

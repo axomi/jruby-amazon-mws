@@ -1,6 +1,12 @@
 A JRuby Library to access Amazon MWS
 ==================================== 
 
+[![Build Status](https://secure.travis-ci.org/integrallis/jruby-amazon-mws.png?branch=master)](http://travis-ci.org/integrallis/jruby-amazon-mws) 
+[![Gem Version](https://badge.fury.io/rb/jruby-amazon-mws.png)](http://badge.fury.io/rb/jruby-amazon-mws)
+[![Dependency Status](https://gemnasium.com/integrallis/jruby-amazon-mws.png)](https://gemnasium.com/integrallis/jruby-amazon-mws) 
+[![Code Climate](https://codeclimate.com/github/integrallis/jruby-amazon-mws.png)](https://codeclimate.com/github/integrallis/jruby-amazon-mws)
+
+
 A JRuby Library to acess the Amazon Marketplace Web Service (Amazon MWS) API version released on  2011-10-01 using the JAXB Java Bindings provided at :
 
 https://images-na.ssl-images-amazon.com/images/G/01/mwsportal/clientlib/products/amazon-mws-v20111001-java-2012-07-01._V388353362_.zip 

@@ -4,7 +4,7 @@ README.md
 Rakefile
 LICENSE
 lib/jruby_amazon_mws.rb
-lib/jruby-amazon-mws/jruby_amazon_mws.rbb
+lib/jruby-amazon-mws/jruby_amazon_mws.rb
 lib/module/mws.rb
 lib/java/MaWSProductsJavaClientLibrary-1.0.jar   
 lib/java/commons-logging-1.1.jar                 
