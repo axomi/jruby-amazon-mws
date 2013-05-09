@@ -90,15 +90,7 @@ module AmazonMWS
               _configure_product_attribute(product, matching_product)
               _configure_product_pricing(product, matching_product)  
               _configure_product_sales_rankings(product, matching_product)
-              _configure_product_lowest_offer(product, matching_product) 
               _configure_product_offers(product, matching_product)
-              
-              # if product.set_relationships?
-              #   relationships = product.relationships
-              #   relationships.any.each do |relationship| 
-              #     relationships = Crack::XML.parse(MWS::ProductsUtil.format_xml(relationship))
-              #   end
-              # end 
 
               matching_products << matching_product
             end    
@@ -298,18 +290,6 @@ module AmazonMWS
           matching_product_sales_rank.rank = sales_rank.rank if sales_rank.set_rank? 
           matching_product.sales_rank_list << matching_product_sales_rank
         end
-      end
-    end
-    
-    def _configure_product_lowest_offer(product, matching_product)  
-      lowest_offer_list = product.set_lowest_offer_listings? ? product.lowest_offer_listings.lowest_offer_listing : []      
-      lowest_offer_list.each do |lowest_offer_listing|
-        qualifiers = lowest_offer_listing.qualifiers if lowest_offer_listing.set_qualifiers?
-        shipping_time = qualifiers.shipping_time if qualifiers && qualifiers.set_shipping_time?
-        price1 = lowest_offer_listing.price if lowest_offer_listing.set_price?
-        landed_price1 = price1.landed_price if price1 && price1.set_landed_price?
-        listing_price1 = price1.listing_price if price1 && price1.set_listing_price?
-        shipping1 = price1.shipping if price1 && price1.set_shipping? 
       end
     end
     
